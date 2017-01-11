@@ -16,17 +16,21 @@ import json
 import sys
 import codecs
 import string
+import json
 
 # specify encode (may not necessary)
 reload(sys)
 sys.setdefaultencoding("utf-8")
 sys.stdout = codecs.getwriter('utf_8')(sys.stdout) 
 
-CK = "XgzvXbBDU9gi8CbeWBDlkoZIn"
-CS = "qsgeJg7BcVN0PSQ3yqgyTdn0v6qJnhJskIygxa776sDYGOJjgG"
-AT = "818765750844334080-XawykMR4fAbWq05H6s6WEXWtEjaJHau" 
-AS = "jtLQ8RJMFjUpedqjgr8IUG7Pd59MrMa0N3H29roE4nKlI"
-
+path_to_key = 'oath_key.json'
+f = open(path_to_key)
+oath_key = json.load(f)
+CK = oath_key['key']['CK']
+CS = oath_key['key']['CS']
+AT = oath_key['key']['AT']
+AS = oath_key['key']['AS']
+f.close()
 # open file
 text = codecs.open('speeches.txt', 'r', 'utf-8').read()
 print('corpus length:', len(text))
